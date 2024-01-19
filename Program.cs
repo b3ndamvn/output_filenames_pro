@@ -79,7 +79,7 @@ class Program
             string[] parts = line.Split(' ');
             string path = parts[0];
             long size = -1; // т.к. Node подразумевает наличие хоть какого-то значения size, укажем -1, т.к. файл с таким размером быть не может
-            if (parts.Length > 1)
+            if (parts.Length > 1 & !path.Contains("\\"))
             {
                 size = long.Parse(parts[1]);
             }
