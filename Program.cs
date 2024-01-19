@@ -21,10 +21,18 @@ class Node
     public void AddPath(string path, long size)
     {
         string[] parts = path.Split('\\');
+        long temp_size = size;
         Node current = this;
         for (int i = 0; i < parts.Length; i++)
         {
             string part = parts[i];
+            if (i < parts.Length - 1)
+            {
+                size = -1;
+            }
+            else {
+                size = temp_size;
+            }
             if (!current.children.ContainsKey(part))
             {
                 current.children[part] = new Node(part, size);
@@ -79,7 +87,7 @@ class Program
             string[] parts = line.Split(' ');
             string path = parts[0];
             long size = -1; // т.к. Node подразумевает наличие хоть какого-то значения size, укажем -1, т.к. файл с таким размером быть не может
-            if (parts.Length > 1 & !path.Contains("\\"))
+            if (parts.Length > 1)
             {
                 size = long.Parse(parts[1]);
             }
